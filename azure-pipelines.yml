@@ -1,0 +1,20 @@
+trigger:
+- main
+
+pool: Default
+
+steps:
+- task: Npm@1
+  inputs:
+    command: 'install'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'run build -- --mode prod'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'dist'
+    ArtifactName: 'app'
+    publishLocation: 'Container'
